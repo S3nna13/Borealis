@@ -1,4 +1,4 @@
-"""Aurelius v2 Skill Curator — lifecycle management: enable, disable, deprecate."""
+"""Borealis Skill Curator — lifecycle management: enable, disable, deprecate."""
 
 from __future__ import annotations
 

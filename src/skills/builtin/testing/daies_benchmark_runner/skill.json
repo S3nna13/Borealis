@@ -1,10 +1,10 @@
 {
-  "id": "testing.daies_benchmark_runner",
-  "name": "DAIES Benchmark Runner",
+  "id": "testing.polaris_benchmark_runner",
+  "name": "POLARIS Benchmark Runner",
   "version": "1.0.0",
   "category": "testing",
-  "summary": "Run DAIES validation gates on a model/profile.",
-  "description": "Run DAIES validation gates on a model/profile.",
+  "summary": "Run POLARIS validation gates on a model/profile.",
+  "description": "Run POLARIS validation gates on a model/profile.",
   "permissions": [
     {
       "name": "file_read",
@@ -22,16 +22,16 @@
     "file.patch",
     "terminal.run"
   ],
-  "entrypoint": "skills.builtin.testing.daies_benchmark_runner:run",
+  "entrypoint": "skills.builtin.testing.polaris_benchmark_runner:run",
   "inputs_schema": "",
   "outputs_schema": "",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run"
   ],
   "tags": [
-    "daies",
+    "polaris",
     "validation"
   ],
   "status": "stable",

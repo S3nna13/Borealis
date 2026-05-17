@@ -25,7 +25,7 @@
   "entrypoint": "skills.builtin.testing.api_contract_test_builder:run",
   "inputs_schema": "",
   "outputs_schema": "",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run"

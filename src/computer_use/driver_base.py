@@ -1,4 +1,4 @@
-"""Aurelius v2 CUA Driver Base — abstract interface for all CUA drivers.
+"""Borealis CUA Driver Base — abstract interface for all CUA drivers.
 
 Modes:
 - verifier_only: validates actions without executing

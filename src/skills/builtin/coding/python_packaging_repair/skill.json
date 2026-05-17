@@ -25,7 +25,7 @@
   "entrypoint": "skills.builtin.coding.python_packaging_repair:run",
   "inputs_schema": "schemas/python_packaging_repair.input.json",
   "outputs_schema": "schemas/python_packaging_repair.output.json",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run"

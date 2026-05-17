@@ -1,4 +1,4 @@
-"""Aurelius v2 Model Export Converter — exports to GGUF, MLX, ONNX, TensorRT-LLM.
+"""Borealis Model Export Converter — exports to GGUF, MLX, ONNX, TensorRT-LLM.
 
 Every exported artifact must pass validation:
 1. Load

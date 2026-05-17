@@ -34,7 +34,7 @@ Every runtime profile produces a budget report:
 {
   "total_memory_gb": 32,
   "reserved_for_os_gb": 4,
-  "available_for_aurelius_gb": 28,
+  "available_for_borealis_gb": 28,
   "budget": {
     "weights_gb": 7.2,
     "kv_cache_gb": 3.1,
@@ -93,7 +93,7 @@ When pressure exceeds the high threshold, the system degrades in strict order:
 2. Monitoring DURING generation — watch pressure levels every N steps
 3. Preemptive degradation — start ladder before critical, not after
 4. Recovery after completion — restore full capability when memory frees
-5. Logging all pressure events — visible in `aurelius logs` and Mission Control
+5. Logging all pressure events — visible in `borealis logs` and Aurora Dashboard
 
 ## Hardware-Specific Notes
 

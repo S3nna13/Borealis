@@ -1,8 +1,8 @@
-# Mission Control UI Specification
+# Aurora Dashboard UI Specification
 
 ## Purpose
 
-Mission Control is the observability and management interface for Aurelius v2. It is the secondary product surface after CLI, providing visual monitoring, configuration, and audit capabilities.
+Aurora Dashboard is the observability and management interface for Borealis. It is the secondary product surface after CLI, providing visual monitoring, configuration, and audit capabilities.
 
 ## UI Routes
 
@@ -12,7 +12,7 @@ Mission Control is the observability and management interface for Aurelius v2. I
 /hardware            Hardware detection and profile recommendation
 /backends            Backend status, selection, configuration
 /capabilities        Capability report (requested vs actual)
-/daies               DAIES dashboard: gate results, validation status
+/polaris               POLARIS dashboard: gate results, validation status
 /cua                 Computer-use dashboard
 /cua/traces/:id      CUA trace replay with screenshots
 /exports             Artifact export status and history
@@ -40,7 +40,7 @@ Mission Control is the observability and management interface for Aurelius v2. I
 - RAM/VRAM usage with bar chart
 - Enabled vs disabled capabilities
 - Native skill status (loaded count, failures)
-- DAIES gate status
+- POLARIS gate status
 - Safety status (blocked actions, warnings)
 - Memory quarantine items
 - CUA blocking reasons

@@ -1,4 +1,4 @@
-"""Aurelius v2 Capability Report — generates reports showing requested vs actual model/backend/artifact."""
+"""Borealis Capability Report — generates reports showing requested vs actual model/backend/artifact."""
 
 from __future__ import annotations
 
@@ -139,7 +139,7 @@ class CapabilityReport:
         cls,
         requested: str = "atlas",
         actual: str = "atlas",
-        backend: str = "remote_aurelius",
+        backend: str = "remote_borealis",
         context: int = 128000,
         hardware: str = "jetson_nano_4gb",
     ) -> CapabilityReport:

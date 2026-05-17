@@ -56,9 +56,9 @@ exports/
 ## CLI Export Commands
 
 ```
-aurelius export gguf --model swift --quant q4 --output ./exports/
-aurelius export mlx --model forge --output ./exports/
-aurelius export onnx --model swift --quant int8 --output ./exports/
-aurelius export tensorrt-llm --model atlas --fp8 --output ./exports/
-aurelius export validate --all
+borealis export gguf --model swift --quant q4 --output ./exports/
+borealis export mlx --model forge --output ./exports/
+borealis export onnx --model swift --quant int8 --output ./exports/
+borealis export tensorrt-llm --model atlas --fp8 --output ./exports/
+borealis export validate --all
 ```

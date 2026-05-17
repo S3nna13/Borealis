@@ -1,4 +1,4 @@
-"""Aurelius v2 Skill Registry — discovery, lookup, listing, loading of native skills."""
+"""Borealis Skill Registry — discovery, lookup, listing, loading of native skills."""
 
 from __future__ import annotations
 
@@ -36,7 +36,7 @@ class SkillEntry:
 
 
 class SkillRegistry:
-    """Central registry for all Aurelius native skills.
+    """Central registry for all Borealis native skills.
 
     Responsibilities:
     - Discover skills from builtin/ directory
@@ -86,7 +86,7 @@ class SkillRegistry:
                         risk_level=RiskLevel(data.get("risk_level", "low")),
                         required_tools=data.get("required_tools", []),
                         entrypoint=data.get("entrypoint", ""),
-                        daies_tests=data.get("daies_tests", []),
+                        polaris_tests=data.get("polaris_tests", []),
                         tags=data.get("tags", []),
                         status=SkillStatus(data.get("status", "stable")),
                         supported_modes=modes,

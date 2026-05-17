@@ -25,7 +25,7 @@
   "entrypoint": "skills.builtin.coding.shell_script_hardening:run",
   "inputs_schema": "schemas/shell_script_hardening.input.json",
   "outputs_schema": "schemas/shell_script_hardening.output.json",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run"

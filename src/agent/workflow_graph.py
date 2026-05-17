@@ -1,4 +1,4 @@
-"""Aurelius v2 workflow graph.
+"""Borealis workflow graph.
 
 This ports the original DAG-style workflow execution idea into a compact,
 standalone utility for sequential and parallel callable orchestration.

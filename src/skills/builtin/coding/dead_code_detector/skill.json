@@ -21,7 +21,7 @@
   "entrypoint": "skills.builtin.coding.dead_code_detector:run",
   "inputs_schema": "schemas/dead_code_detector.input.json",
   "outputs_schema": "schemas/dead_code_detector.output.json",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run"

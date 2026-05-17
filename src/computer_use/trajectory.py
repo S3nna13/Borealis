@@ -1,4 +1,4 @@
-"""Aurelius v2 CUA Trajectory — recording, replay, and evaluation of CUA action sequences."""
+"""Borealis CUA Trajectory — recording, replay, and evaluation of CUA action sequences."""
 
 from __future__ import annotations
 

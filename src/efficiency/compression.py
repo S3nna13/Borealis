@@ -1,4 +1,4 @@
-"""Aurelius v2 Compression — KV cache compression, context compression."""
+"""Borealis Compression — KV cache compression, context compression."""
 
 from __future__ import annotations
 

@@ -25,7 +25,7 @@
   "entrypoint": "skills.builtin.testing.coverage_gap_finder:run",
   "inputs_schema": "",
   "outputs_schema": "",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run"

@@ -1,11 +1,11 @@
-"""Integration smoke tests for the Aurelius v2 surface area."""
+"""Integration smoke tests for the Borealis surface area."""
 
 from __future__ import annotations
 
 import asyncio
 import sys
 
-import aurelius_cli.v2_cli as cli
+import borealis_cli.v2_cli as cli
 from src.api.server import api_hardware_detect, api_health, app
 from src.runtime.hardware_detector import HardwareDetector
 
@@ -20,24 +20,24 @@ def test_hardware_detector_exposes_gpu_facades() -> None:
 
 
 def test_cli_help_and_status(monkeypatch, capsys) -> None:
-    monkeypatch.setattr(sys, "argv", ["aurelius"])
+    monkeypatch.setattr(sys, "argv", ["borealis"])
     assert cli.main_v2() == 1
     help_out = capsys.readouterr().out
-    assert "Usage: python -m aurelius_cli.v2_cli" in help_out
+    assert "Usage: python -m borealis_cli.v2_cli" in help_out
 
-    monkeypatch.setattr(sys, "argv", ["aurelius", "status"])
+    monkeypatch.setattr(sys, "argv", ["borealis", "status"])
     assert cli.main_v2() == 0
     status_out = capsys.readouterr().out
-    assert "Aurelius v2 Status" in status_out
+    assert "Borealis Status" in status_out
     assert "Skills:" in status_out
 
 
 def test_cli_serve_command(monkeypatch, capsys) -> None:
-    monkeypatch.setattr(sys, "argv", ["aurelius", "serve", "--port", "8765"])
+    monkeypatch.setattr(sys, "argv", ["borealis", "serve", "--port", "8765"])
     assert cli.main_v2() == 0
     out = capsys.readouterr().out
     assert "8765" in out
-    assert "Aurelius API server" in out
+    assert "Borealis API server" in out
 
 
 def test_api_surface_smoke() -> None:

@@ -21,7 +21,7 @@
   "entrypoint": "skills.builtin.security.auth_fail_closed_audit:run",
   "inputs_schema": "",
   "outputs_schema": "",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run",

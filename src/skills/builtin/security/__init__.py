@@ -1,1 +1,1 @@
-"""Aurelius v2 Built-in Skills - security"""
+"""Borealis Built-in Skills - security"""

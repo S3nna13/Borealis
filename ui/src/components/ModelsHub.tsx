@@ -10,9 +10,9 @@ interface ModelInfo {
 
 const ModelsHub: React.FC = () => {
   const [models] = useState<ModelInfo[]>([
-    { name: "Aurelius Swift", size: "~0.6B", purpose: "Edge, router, verifier", target: "Jetson Nano+, Mac 8GB+", status: "Ready" },
-    { name: "Aurelius Forge", size: "~3B", purpose: "Default agent, coding, CUA", target: "Mac 16GB+, RTX 8-24GB+", status: "Ready" },
-    { name: "Aurelius Atlas", size: "~32B/8B active", purpose: "Frontier reasoning, orchestration", target: "RTX 6000+, Blackwell, Mac Ultra", status: "Ready" },
+    { name: "Borealis Spark", size: "~0.6B", purpose: "Edge, router, verifier", target: "Jetson Nano+, Mac 8GB+", status: "Ready" },
+    { name: "Borealis Core", size: "~3B", purpose: "Default agent, coding, CUA", target: "Mac 16GB+, RTX 8-24GB+", status: "Ready" },
+    { name: "Borealis Apex", size: "~32B/8B active", purpose: "Frontier reasoning, orchestration", target: "RTX 6000+, Blackwell, Mac Ultra", status: "Ready" },
   ]);
 
   return (

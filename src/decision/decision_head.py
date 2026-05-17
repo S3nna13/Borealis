@@ -1,6 +1,6 @@
-"""Aurelius v2 DecisionHead — decisive action routing without loops.
+"""Borealis DecisionHead — decisive action routing without loops.
 
-Implements the DAIES decision scoring system:
+Implements the POLARIS decision scoring system:
   score = utility + information_gain - risk - cost
 
 Where cost includes: latency, tokens, dollars, watts, memory pressure,

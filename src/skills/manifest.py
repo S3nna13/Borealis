@@ -1,4 +1,4 @@
-"""Aurelius v2 Skill Manifest — typed schema for built-in skill definitions."""
+"""Borealis Skill Manifest — typed schema for built-in skill definitions."""
 
 from __future__ import annotations
 
@@ -38,7 +38,7 @@ class SkillPermission:
 
 @dataclass
 class SkillManifest:
-    """Typed manifest for an Aurelius native skill.
+    """Typed manifest for an Borealis native skill.
 
     Every built-in skill MUST have a valid manifest.
     External skills are validated against this schema before loading.
@@ -55,7 +55,7 @@ class SkillManifest:
     entrypoint: str = ""  # "skills.builtin.coding.python_test_repair:run"
     inputs_schema: str = ""  # Path to JSON schema for inputs
     outputs_schema: str = ""  # Path to JSON schema for outputs
-    daies_tests: list[str] = field(default_factory=list)
+    polaris_tests: list[str] = field(default_factory=list)
     tags: list[str] = field(default_factory=list)
     status: SkillStatus = SkillStatus.STABLE
     supported_modes: list[SkillExecutionMode] = field(default_factory=lambda: [
@@ -112,7 +112,7 @@ class SkillManifest:
             "entrypoint": self.entrypoint,
             "inputs_schema": self.inputs_schema,
             "outputs_schema": self.outputs_schema,
-            "daies_tests": self.daies_tests,
+            "polaris_tests": self.polaris_tests,
             "tags": self.tags,
             "status": self.status.value,
             "supported_modes": [m.value for m in self.supported_modes],

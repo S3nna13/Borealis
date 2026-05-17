@@ -25,7 +25,7 @@
   "entrypoint": "skills.builtin.security.evidence_store_builder:run",
   "inputs_schema": "",
   "outputs_schema": "",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run",

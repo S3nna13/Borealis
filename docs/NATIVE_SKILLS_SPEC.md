@@ -3,8 +3,8 @@
 ## Principle
 
 ```
-Skills are first-party Aurelius capability bundles.
-Installed with Aurelius. Versioned, tested, permissioned, auditable.
+Skills are first-party Borealis capability bundles.
+Installed with Borealis. Versioned, tested, permissioned, auditable.
 No external hub dependency.
 ```
 
@@ -18,7 +18,7 @@ src/skills/
 ├── loader.py         # Load, cache, unload skills
 ├── permissions.py    # Permission gate + enforcement
 ├── executor.py       # Execute skill in dry_run/plan/execute/verify/rollback modes
-├── validator.py      # Validate manifest, test fixtures, DAIES gates
+├── validator.py      # Validate manifest, test fixtures, POLARIS gates
 ├── telemetry.py      # Track usage, success, failures, latency
 ├── curator.py        # Skill lifecycle: enable/disable/deprecate
 ├── builtin/          # ~150 built-in skills organized by category
@@ -61,7 +61,7 @@ required_tools:
 entrypoint: skills.builtin.coding.python_test_repair:run
 inputs_schema: schemas/python_test_repair.input.json
 outputs_schema: schemas/python_test_repair.output.json
-daies_tests:
+polaris_tests:
   - skill_manifest_valid
   - permission_boundary
   - dry_run
@@ -118,21 +118,21 @@ Track per-skill:
 - user_approval_count
 - rollback_count
 - last_used timestamp
-- DAIES pass/fail status
+- POLARIS pass/fail status
 
 ## CLI Commands
 
 ```
-aurelius skills list
-aurelius skills search <query>
-aurelius skills show <id>
-aurelius skills run <id> --dry-run
-aurelius skills run <id>
-aurelius skills verify <id>
-aurelius skills test <id>
-aurelius skills telemetry <id>
-aurelius skills categories
-aurelius skills audit
+borealis skills list
+borealis skills search <query>
+borealis skills show <id>
+borealis skills run <id> --dry-run
+borealis skills run <id>
+borealis skills verify <id>
+borealis skills test <id>
+borealis skills telemetry <id>
+borealis skills categories
+borealis skills audit
 ```
 
 ## Safety Requirements
@@ -153,8 +153,8 @@ Every built-in skill must have:
 3. **Testing/QA** — 15 skills (pytest repair, flake detector, regression writer, coverage gaps, CUA trajectory test)
 4. **Security** — 20 skills (injection audit, sandbox escape, SSRF, secret scanner, PII scanner, CVE scanner, SARIF)
 5. **DevOps/Deploy** — 15 skills (doctor, GPU check, CUDA/TensorRT checker, MLX checker, backend checkers)
-6. **ML/Model** — 20 skills (tokenizer, checkpoint, FLOP/RAM/VRAM estimate, GGUF/MLX/ONNX/TRT export, PRAXIS runner)
+6. **ML/Model** — 20 skills (tokenizer, checkpoint, FLOP/RAM/VRAM estimate, GGUF/MLX/ONNX/TRT export, AURORA runner)
 7. **Data/Retrieval** — 10 skills (dataset validation, dedup, RAG index, context compressor, provenance)
 8. **CUA/UI** — 10 skills (capture verifier, action planner, trajectory recorder, replay, OCR, safety blocker)
 9. **Productivity/Research** — 10 skills (literature review, experiment tracker, decision matrix, roadmap)
-10. **Operator** — 10 skills (hardware profile, backend audit, capability report, DAIES gates, fallback audit)
+10. **Operator** — 10 skills (hardware profile, backend audit, capability report, POLARIS gates, fallback audit)

@@ -21,7 +21,7 @@
   "entrypoint": "skills.builtin.ml.model_config_validator:run",
   "inputs_schema": "",
   "outputs_schema": "",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run"

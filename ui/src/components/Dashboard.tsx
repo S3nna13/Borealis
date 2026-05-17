@@ -34,7 +34,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold text-gray-100">Mission Control Dashboard</h1>
+      <h1 className="text-2xl font-bold text-gray-100">Aurora Dashboard Dashboard</h1>
 
       <div className="flex gap-4">
         <div className="flex-1 bg-gray-800 rounded-lg p-4 text-center">

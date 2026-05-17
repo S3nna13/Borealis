@@ -1,4 +1,4 @@
-"""Aurelius v2 Memory Budget Manager — tracks RAM/VRAM, computes budgets, pressure detection, degradation ladder."""
+"""Borealis Memory Budget Manager — tracks RAM/VRAM, computes budgets, pressure detection, degradation ladder."""
 
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ class MemoryBudgetReport:
 
     total_memory_gb: float
     reserved_for_os_gb: float
-    available_for_aurelius_gb: float
+    available_for_borealis_gb: float
     weights_gb: float
     kv_cache_gb: float
     runtime_memory_gb: float
@@ -103,7 +103,7 @@ class MemoryBudgetManager:
 
     def __init__(self, config: MemoryBudgetConfig) -> None:
         self.config = config
-        self.available_for_aurelius = config.total_memory_gb - config.reserved_for_os_gb
+        self.available_for_borealis = config.total_memory_gb - config.reserved_for_os_gb
         self.active_degradation_steps: list[int] = []  # indices into DEGRADATION_LADDER
         self._current_values: dict[str, float] = {
             "weights_gb": config.weights_gb,
@@ -129,16 +129,16 @@ class MemoryBudgetManager:
         return sum(self._current_values.values())
 
     def get_free_gb(self) -> float:
-        """Remaining memory in the Aurelius budget."""
+        """Remaining memory in the Borealis budget."""
         used = self.get_used_total_gb()
-        free = self.available_for_aurelius - used - self.config.safety_reserve_gb
+        free = self.available_for_borealis - used - self.config.safety_reserve_gb
         return max(0.0, free)
 
     def pressure_fraction(self) -> float:
         """Return the fraction of available memory that is used."""
-        if self.available_for_aurelius <= 0:
+        if self.available_for_borealis <= 0:
             return 1.0
-        return min(1.0, self.get_used_total_gb() / self.available_for_aurelius)
+        return min(1.0, self.get_used_total_gb() / self.available_for_borealis)
 
     def pressure_level(self) -> PressureLevel:
         """Determine current pressure level."""
@@ -216,7 +216,7 @@ class MemoryBudgetManager:
         return MemoryBudgetReport(
             total_memory_gb=self.config.total_memory_gb,
             reserved_for_os_gb=self.config.reserved_for_os_gb,
-            available_for_aurelius_gb=self.available_for_aurelius,
+            available_for_borealis_gb=self.available_for_borealis,
             weights_gb=self._current_values.get("weights_gb", 0),
             kv_cache_gb=self._current_values.get("kv_cache_gb", 0),
             runtime_memory_gb=self._current_values.get("runtime_memory_gb", 0),

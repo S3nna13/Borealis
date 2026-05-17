@@ -1,4 +1,4 @@
-"""Aurelius v2 Skill Telemetry — usage tracking, success rates, latency statistics."""
+"""Borealis Skill Telemetry — usage tracking, success rates, latency statistics."""
 
 from __future__ import annotations
 
@@ -31,7 +31,7 @@ class SkillTelemetry:
     user_approval_count: int = 0
     rollback_count: int = 0
     last_used: str = ""
-    daies_pass: bool = True
+    polaris_pass: bool = True
     events: list[TelemetryEvent] = field(default_factory=list)
 
     def record(self, event: TelemetryEvent) -> None:
@@ -77,5 +77,5 @@ class SkillTelemetry:
             "user_approval_count": self.user_approval_count,
             "rollback_count": self.rollback_count,
             "last_used": self.last_used,
-            "daies_pass": self.daies_pass,
+            "polaris_pass": self.polaris_pass,
         }

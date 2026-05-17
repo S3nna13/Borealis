@@ -1,4 +1,4 @@
-"""Aurelius v2 Efficiency — KV cache, attention, compression, quantization, sparsity."""
+"""Borealis Efficiency — KV cache, attention, compression, quantization, sparsity."""
 
 from src.efficiency.attention import (
     AttentionSinkManager,

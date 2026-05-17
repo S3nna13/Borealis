@@ -1,1 +1,1 @@
-"""Aurelius v2 source root package."""
+"""Borealis source root package."""

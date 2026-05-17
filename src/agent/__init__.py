@@ -1,7 +1,7 @@
-"""Aurelius v2 agent primitives.
+"""Borealis agent primitives.
 
 This package ports the most useful lightweight agent-side ideas from the
-original Aurelius tree: trigger-based skill matching, DAG workflow
+original Borealis tree: trigger-based skill matching, DAG workflow
 execution, a persistent in-process task scheduler, and a transport-agnostic
 MCP client shim.
 """

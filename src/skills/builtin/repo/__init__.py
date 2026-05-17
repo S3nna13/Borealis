@@ -1,1 +1,1 @@
-"""Aurelius v2 Built-in Skills - repo"""
+"""Borealis Built-in Skills - repo"""

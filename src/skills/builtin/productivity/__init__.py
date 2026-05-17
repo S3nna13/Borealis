@@ -1,1 +1,1 @@
-"""Aurelius v2 Built-in Skills - productivity"""
+"""Borealis Built-in Skills - productivity"""

@@ -1,4 +1,4 @@
-"""Aurelius v2 Skill Executor — runs skills in dry_run/plan/execute/verify/rollback modes."""
+"""Borealis Skill Executor — runs skills in dry_run/plan/execute/verify/rollback modes."""
 
 from __future__ import annotations
 

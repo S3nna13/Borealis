@@ -144,7 +144,7 @@ class MCPClient:
     def __init__(
         self,
         call_fn: Callable[[str, dict], dict],
-        client_name: str = "aurelius",
+        client_name: str = "borealis",
         client_version: str = "0.1.0",
     ) -> None:
         if not callable(call_fn):

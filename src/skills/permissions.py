@@ -1,4 +1,4 @@
-"""Aurelius v2 Skill Permissions — permission gate and enforcement."""
+"""Borealis Skill Permissions — permission gate and enforcement."""
 
 from __future__ import annotations
 

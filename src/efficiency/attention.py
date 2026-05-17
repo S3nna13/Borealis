@@ -1,4 +1,4 @@
-"""Aurelius v2 Attention Efficiency — cross-layer KV sharing, attention sinks, dynamic sparse attention."""
+"""Borealis Attention Efficiency — cross-layer KV sharing, attention sinks, dynamic sparse attention."""
 
 from __future__ import annotations
 

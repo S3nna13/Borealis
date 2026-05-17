@@ -1,18 +1,18 @@
-"""Aurelius v2 CLI — v2 command layer built alongside the existing main.py.
+"""Borealis CLI — v2 command layer built alongside the existing main.py.
 
 This module provides the v2 command structure defined in the master plan.
 The existing main.py handles legacy commands; this extends with v2 features.
 
 Usage:
-    aurelius doctor          # System health check
-    aurelius hardware detect # Detect hardware
-    aurelius profile use     # Use a hardware profile
-    aurelius skills list     # List native skills
-    aurelius skills suggest  # Suggest matching skills for a prompt
-    aurelius daies quick     # Run quick DAIES gate
-    aurelius schedule        # Schedule cron/interval/delayed shell jobs
-    aurelius serve           # Start runtime API server
-    aurelius ui              # Open Mission Control UI
+    borealis doctor          # System health check
+    borealis hardware detect # Detect hardware
+    borealis profile use     # Use a hardware profile
+    borealis skills list     # List native skills
+    borealis skills suggest  # Suggest matching skills for a prompt
+    borealis polaris quick     # Run quick POLARIS gate
+    borealis schedule        # Schedule cron/interval/delayed shell jobs
+    borealis serve           # Start runtime API server
+    borealis ui              # Open Aurora Dashboard UI
 """
 
 from __future__ import annotations
@@ -66,7 +66,7 @@ def cmd_doctor() -> int:
 
     # Print results
     if con:
-        table = Table(title="Aurelius Doctor — System Health")
+        table = Table(title="Borealis Doctor — System Health")
         table.add_column("Check", style="cyan")
         table.add_column("Status", style="bold")
         table.add_column("Detail")
@@ -75,7 +75,7 @@ def cmd_doctor() -> int:
             table.add_row(r["check"], f"[{status_style}]{r['status']}[/]", r["detail"])
         con.print(table)
     else:
-        print("Aurelius Doctor")
+        print("Borealis Doctor")
         print("=" * 60)
         for r in results:
             print(f"  {r['check']:20s} [{r['status']:7s}] {r['detail']}")
@@ -118,7 +118,7 @@ def cmd_hardware_detect() -> int:
             print(f"RAM: {info.total_ram_gb} GB")
             print(f"Recommended Models: {profile.recommended_models}")
     except ImportError:
-        print("ERROR: Runtime module not available. Run from aurelius/ directory.")
+        print("ERROR: Runtime module not available. Run from borealis/ directory.")
         return 1
     return 0
 
@@ -134,7 +134,7 @@ def cmd_skills_list(category: str | None = None) -> int:
         con = _console()
 
         if con:
-            table = Table(title=f"Aurelius Native Skills ({len(skills)} loaded, {count} discovered)")
+            table = Table(title=f"Borealis Native Skills ({len(skills)} loaded, {count} discovered)")
             table.add_column("ID", style="cyan")
             table.add_column("Name")
             table.add_column("Category")
@@ -189,8 +189,8 @@ def cmd_skills_suggest(query: str) -> int:
     return 0
 
 
-def cmd_daies_quick() -> int:
-    """Run quick DAIES gate check."""
+def cmd_polaris_quick() -> int:
+    """Run quick POLARIS gate check."""
     try:
         from src.skills.registry import SkillRegistry
         from src.skills.validator import SkillValidator
@@ -213,7 +213,7 @@ def cmd_daies_quick() -> int:
         con = _console()
         if con:
             from rich.table import Table
-            table = Table(title="DAIES Quick Gate")
+            table = Table(title="POLARIS Quick Gate")
             table.add_column("Gate", style="cyan")
             table.add_column("Result")
             table.add_column("Detail")
@@ -223,7 +223,7 @@ def cmd_daies_quick() -> int:
             table.add_row("No Silent Fallback", "CHECKED", "all manifests specify model truth")
             con.print(table)
         else:
-            print(f"DAIES Quick Gate: {results['passed']}/{results['total_checked']} passed, {results['failed']} failed")
+            print(f"POLARIS Quick Gate: {results['passed']}/{results['total_checked']} passed, {results['failed']} failed")
 
         return 0 if results["failed"] == 0 else 1
     except ImportError as e:
@@ -253,12 +253,12 @@ def cmd_status() -> int:
         registry = SkillRegistry()
         skill_count = registry.discover_from_path()
 
-        print("Aurelius v2 Status")
+        print("Borealis Status")
         print(f"{'='*50}")
         print(f"  Hardware: {info.cpu_arch} | RAM: {info.total_ram_gb}GB")
         if info.gpu_name:
             print(f"  GPU: {info.gpu_name} | VRAM: {info.gpu_vram_gb}GB")
-        print(f"  Memory: {report.used_gb:.1f}GB used / {report.available_for_aurelius_gb:.1f}GB available")
+        print(f"  Memory: {report.used_gb:.1f}GB used / {report.available_for_borealis_gb:.1f}GB available")
         print(f"  Pressure: {report.pressure_level.value}")
         print(f"  Skills: {skill_count} discovered")
         print(f"  CUDA: {info.cuda_available} | MLX: {info.mlx_available}")
@@ -270,25 +270,25 @@ def cmd_status() -> int:
 
 def cmd_serve(port: int = 8000) -> int:
     """Start runtime API server."""
-    print(f"Starting Aurelius API server on port {port}...")
+    print(f"Starting Borealis API server on port {port}...")
     print("See src/api/ for server implementation.")
     print("For development: uvicorn src.api.server:app --reload --port {port}")
     return 0
 
 
 def cmd_ui() -> int:
-    """Open Mission Control UI."""
-    print("Opening Mission Control UI...")
+    """Open Aurora Dashboard UI."""
+    print("Opening Aurora Dashboard UI...")
     print("Navigate to http://localhost:5173 in your browser.")
-    print("See aurelius/ui/ for frontend implementation.")
+    print("See borealis/ui/ for frontend implementation.")
     return 0
 
 
 def main_v2() -> int:
     """Entry point for v2 commands when invoked directly."""
     if len(sys.argv) < 2:
-        print("Usage: python -m aurelius_cli.v2_cli <command> [args]")
-        print("Commands: doctor, hardware, skills, daies, schedule, status, serve, ui, skills suggest")
+        print("Usage: python -m borealis_cli.v2_cli <command> [args]")
+        print("Commands: doctor, hardware, skills, polaris, schedule, status, serve, ui, skills suggest")
         return 1
 
     command = sys.argv[1]
@@ -306,16 +306,16 @@ def main_v2() -> int:
         if len(sys.argv) > 2 and sys.argv[2] == "suggest":
             query = " ".join(sys.argv[3:]).strip()
             if not query:
-                print("Usage: aurelius skills suggest <query>")
+                print("Usage: borealis skills suggest <query>")
                 return 1
             return cmd_skills_suggest(query)
         return 0
-    elif command == "daies":
+    elif command == "polaris":
         if len(sys.argv) > 2 and sys.argv[2] in ("quick",):
-            return cmd_daies_quick()
+            return cmd_polaris_quick()
         return 0
     elif command == "schedule":
-        from aurelius_cli.scheduler_commands import main_schedule
+        from borealis_cli.scheduler_commands import main_schedule
 
         return main_schedule(sys.argv[2:])
     elif command == "status":

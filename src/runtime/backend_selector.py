@@ -1,4 +1,4 @@
-"""Aurelius v2 Backend Selector — chooses the best backend based on hardware, model, artifacts, and policy."""
+"""Borealis Backend Selector — chooses the best backend based on hardware, model, artifacts, and policy."""
 
 from __future__ import annotations
 
@@ -18,7 +18,7 @@ class BackendType(enum.StrEnum):
     TENSORRT_EDGE_LLM = "tensorrt_edge_llm"
     TENSORRT_LLM = "tensorrt_llm"
     VLLM = "vllm"
-    REMOTE_AURELIUS = "remote_aurelius"
+    REMOTE_BOREALIS = "remote_borealis"
 
 
 @dataclass
@@ -50,7 +50,7 @@ class BackendSelection:
             BackendType.TENSORRT_EDGE_LLM: CapabilityMode.REDUCED_LOCAL,
             BackendType.TENSORRT_LLM: CapabilityMode.FULL_LOCAL,
             BackendType.VLLM: CapabilityMode.FULL_LOCAL,
-            BackendType.REMOTE_AURELIUS: CapabilityMode.REMOTE,
+            BackendType.REMOTE_BOREALIS: CapabilityMode.REMOTE,
         }
         exec_mode_map.get(self.backend, CapabilityMode.FULL_LOCAL)
         if self.capability_mode == CapabilityMode.REMOTE:
@@ -132,7 +132,7 @@ class BackendSelector:
         # Unknown model: default to remote or most capable available
         if has_remote:
             return BackendSelection(
-                backend=BackendType.REMOTE_AURELIUS,
+                backend=BackendType.REMOTE_BOREALIS,
                 quantization="fp8",
                 context_budget=32768,
                 capability_mode=CapabilityMode.REMOTE,
@@ -212,7 +212,7 @@ class BackendSelector:
 
         # If not enough local resources, try remote
         if has_remote:
-            return BackendSelection(BackendType.REMOTE_AURELIUS, "fp8", 32768,
+            return BackendSelection(BackendType.REMOTE_BOREALIS, "fp8", 32768,
                                     CapabilityMode.SPLIT, 0,
                                     reasons=["Forge insufficient local memory; using remote inference"])
 
@@ -222,7 +222,7 @@ class BackendSelector:
                                     CapabilityMode.REDUCED_LOCAL, 0,
                                     reasons=["Forge: PyTorch eager with heavy offload"])
 
-        return BackendSelection(BackendType.REMOTE_AURELIUS, "fp8", 16384,
+        return BackendSelection(BackendType.REMOTE_BOREALIS, "fp8", 16384,
                                 CapabilityMode.REMOTE, 0,
                                 reasons=["Forge: no viable local backend; remote only"])
 
@@ -258,11 +258,11 @@ class BackendSelector:
 
         # Remote is most likely for Atlas on most hardware
         if has_remote:
-            return BackendSelection(BackendType.REMOTE_AURELIUS, "fp8", 131072,
+            return BackendSelection(BackendType.REMOTE_BOREALIS, "fp8", 131072,
                                     CapabilityMode.SPLIT, 10,
                                     reasons=["Atlas: remote inference with local tools/CUA"])
 
         # Nothing available
-        return BackendSelection(BackendType.REMOTE_AURELIUS, "fp8", 32768,
+        return BackendSelection(BackendType.REMOTE_BOREALIS, "fp8", 32768,
                                 CapabilityMode.REMOTE, 0,
                                 reasons=["Atlas: no local backend available; remote only"])

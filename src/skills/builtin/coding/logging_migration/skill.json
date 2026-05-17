@@ -25,7 +25,7 @@
   "entrypoint": "skills.builtin.coding.logging_migration:run",
   "inputs_schema": "schemas/logging_migration.input.json",
   "outputs_schema": "schemas/logging_migration.output.json",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run"

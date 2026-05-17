@@ -1,4 +1,4 @@
-"""Aurelius v2 Hardware Detector — auto-detects CPU, GPU, memory, and recommends profiles."""
+"""Borealis Hardware Detector — auto-detects CPU, GPU, memory, and recommends profiles."""
 
 from __future__ import annotations
 
@@ -54,7 +54,7 @@ class HardwareInfo:
 
 
 class HardwareDetector:
-    """Detects hardware capabilities and maps them to Aurelius HardwareProfiles."""
+    """Detects hardware capabilities and maps them to Borealis HardwareProfiles."""
 
     @staticmethod
     def detect() -> HardwareInfo:
@@ -86,7 +86,7 @@ class HardwareDetector:
 
     @staticmethod
     def recommend_profile(info: HardwareInfo) -> HardwareProfile:
-        """Map raw hardware detection to an Aurelius hardware profile."""
+        """Map raw hardware detection to an Borealis hardware profile."""
         profile = _build_profile_from_info(info)
         profile.recommended_models = _recommend_models_for_profile(profile)
         return profile
@@ -195,7 +195,7 @@ def _probe_mlx(info: HardwareInfo) -> None:
 
 
 def _build_profile_from_info(info: HardwareInfo) -> HardwareProfile:
-    """Convert raw HardwareInfo to an Aurelius HardwareProfile."""
+    """Convert raw HardwareInfo to an Borealis HardwareProfile."""
     total_gpu_vram = sum(g.get("vram_gb", 0.0) for g in info.gpu_info)
     if info.unified_memory:
         total_gpu_vram = info.unified_memory_gb

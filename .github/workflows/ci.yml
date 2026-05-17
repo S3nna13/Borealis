@@ -27,7 +27,7 @@ jobs:
           python -m pip install fastapi pydantic rich pytest ruff
 
       - name: Ruff
-        run: python -m ruff check src aurelius_cli tests
+        run: python -m ruff check src borealis_cli tests
 
       - name: Pytest
         run: python -m pytest

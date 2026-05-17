@@ -3,14 +3,14 @@
 ## Principle
 
 ```
-CLI first. UI is Mission Control, not the daily driver.
+CLI first. UI is Aurora Dashboard, not the daily driver.
 No silent fallback. Every command reports truthfully.
 ```
 
 ## Command Tree
 
 ```
-aurelius
+borealis
 ├── chat                 # Interactive chat/assistant mode
 ├── run                  # One-shot prompt/task
 ├── agent                # Autonomous task mode (ReAct + tools + memory)
@@ -28,10 +28,10 @@ aurelius
 ├── sessions             # List/resume/export/delete sessions
 ├── checkpoint           # Snapshot/rollback workspace state
 ├── serve                # Start API/runtime server
-├── ui                   # Launch/open/build Mission Control UI
+├── ui                   # Launch/open/build Aurora Dashboard UI
 ├── train                # Train/fine-tune/distill
 ├── eval                 # Run evaluation suites
-├── daies                # Run DAIES validation gates
+├── polaris                # Run POLARIS validation gates
 ├── export               # Export GGUF/MLX/ONNX/TensorRT artifacts
 ├── doctor               # Full health/dependency/environment check
 ├── logs                 # Tail/search application logs
@@ -71,11 +71,11 @@ aurelius
 /cua mode          Show/set CUA mode
 /checkpoint        Create workspace checkpoint
 /rollback          Rollback to last checkpoint
-/daies quick       Run quick DAIES gate check
-/daies full        Run full DAIES validation
+/polaris quick       Run quick POLARIS gate check
+/polaris full        Run full POLARIS validation
 /export [format]   Start model export
 /serve             Runtime status
-/ui                Open Mission Control
+/ui                Open Aurora Dashboard
 /logs              Show recent logs
 /traces            Show recent traces
 /config            View current configuration
@@ -87,11 +87,11 @@ aurelius
 The CLI renders a persistent status bar:
 
 ```
-Aurelius Forge | local mlx q4 | ctx 32K | RAM 14.2/32GB | CUA local_full | skills 150 | tools 18 | profile mac_silicon_32gb
+Borealis Core | local mlx q4 | ctx 32K | RAM 14.2/32GB | CUA local_full | skills 150 | tools 18 | profile mac_silicon_32gb
 ```
 
 ```
-Aurelius Atlas | remote | local controller | ctx 128K | RAM 3.1/4GB | CUA verifier_only | skills 150 | profile jetson_nano_4gb
+Borealis Apex | remote | local controller | ctx 128K | RAM 3.1/4GB | CUA verifier_only | skills 150 | profile jetson_nano_4gb
 ```
 
 ## Safety UX
@@ -122,20 +122,20 @@ Next: user takeover or explicit safe alternative required
 ## Definition of Done
 
 CLI is complete when:
-- `aurelius --help` is accurate for all commands
-- `aurelius doctor` detects hardware/backends/artifacts
-- `aurelius hardware detect` produces profile recommendation
-- `aurelius profile use` switches runtime profile
-- `aurelius models list/load` works with local artifacts
-- `aurelius backend list/select` works
-- `aurelius skills list/run/test/audit` works
-- `aurelius chat` works with live model or clearly labeled mock
-- `aurelius run` supports one-shot tasks with full metadata
-- `aurelius agent` supports autonomous task mode
-- `aurelius computer capture` works in available CUA mode
-- `aurelius daies quick` runs validation gates
-- `aurelius export` validates export contracts
-- `aurelius serve` starts API/runtime server
-- `aurelius ui open` launches Mission Control
+- `borealis --help` is accurate for all commands
+- `borealis doctor` detects hardware/backends/artifacts
+- `borealis hardware detect` produces profile recommendation
+- `borealis profile use` switches runtime profile
+- `borealis models list/load` works with local artifacts
+- `borealis backend list/select` works
+- `borealis skills list/run/test/audit` works
+- `borealis chat` works with live model or clearly labeled mock
+- `borealis run` supports one-shot tasks with full metadata
+- `borealis agent` supports autonomous task mode
+- `borealis computer capture` works in available CUA mode
+- `borealis polaris quick` runs validation gates
+- `borealis export` validates export contracts
+- `borealis serve` starts API/runtime server
+- `borealis ui open` launches Aurora Dashboard
 - RAM/VRAM status is visible in status bar
 - No silent fallback — all substitutions are labeled

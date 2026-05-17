@@ -21,7 +21,7 @@
   "entrypoint": "skills.builtin.security.container_security_audit:run",
   "inputs_schema": "",
   "outputs_schema": "",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run",

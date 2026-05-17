@@ -2,19 +2,19 @@
 commands directly from the terminal.
 
 Usage:
-  aurelius schedule cron "<cron_expr>" -- <command> [args...]
-  aurelius schedule interval <seconds> -- <command> [args...]
-  aurelius schedule once <delay_seconds> -- <command> [args...]
+  borealis schedule cron "<cron_expr>" -- <command> [args...]
+  borealis schedule interval <seconds> -- <command> [args...]
+  borealis schedule once <delay_seconds> -- <command> [args...]
 
 Examples:
   # Run backup.py every day at 02:00
-  aurelius schedule cron "0 2 * * *" -- python backup.py
+  borealis schedule cron "0 2 * * *" -- python backup.py
 
   # Heartbeat every 30 seconds
-  aurelius schedule interval 30 -- curl -X POST https://hc.io/ping
+  borealis schedule interval 30 -- curl -X POST https://hc.io/ping
 
   # Delay a notification by 5 minutes
-  aurelius schedule once 300 -- osascript -e 'display notification "Done!"'
+  borealis schedule once 300 -- osascript -e 'display notification "Done!"'
 
 The scheduler runs in the foreground until interrupted (Ctrl+C). Jobs execute
 concurrently in background threads. Press Ctrl+C to stop the scheduler and
@@ -50,21 +50,21 @@ def _parse_delay(delay: str | int | float) -> float:
 
 def build_schedule_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="aurelius schedule",
+        prog="borealis schedule",
         description=(
-            "Run shell commands on a schedule using Aurelius' in-process TaskScheduler. "
+            "Run shell commands on a schedule using Borealis' in-process TaskScheduler. "
             "Subcommands create new jobs or manage existing ones. Creation commands block until Ctrl+C."
         ),
         epilog=(
             "examples:\n"
-            '  aurelius schedule cron "0 2 * * *" -- python backup.py\n'
-            "  aurelius schedule interval 60 -- curl -X POST https://hc.io/ping\n"
-            "  aurelius schedule once 300 -- say 'task complete'\n"
-            "  aurelius schedule list\n"
-            "  aurelius schedule cancel <job_id>\n"
-            "  aurelius schedule pause <job_id>\n"
-            "  aurelius schedule resume <job_id>\n"
-            "  aurelius schedule clear --yes"
+            '  borealis schedule cron "0 2 * * *" -- python backup.py\n'
+            "  borealis schedule interval 60 -- curl -X POST https://hc.io/ping\n"
+            "  borealis schedule once 300 -- say 'task complete'\n"
+            "  borealis schedule list\n"
+            "  borealis schedule cancel <job_id>\n"
+            "  borealis schedule pause <job_id>\n"
+            "  borealis schedule resume <job_id>\n"
+            "  borealis schedule clear --yes"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )

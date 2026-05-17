@@ -25,7 +25,7 @@
   "entrypoint": "skills.builtin.coding.react_component_repair:run",
   "inputs_schema": "schemas/react_component_repair.input.json",
   "outputs_schema": "schemas/react_component_repair.output.json",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run"

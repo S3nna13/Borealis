@@ -1,16 +1,16 @@
-# Aurelius v2 Model Card — Three-Model Family
+# Borealis Model Card — Three-Model Family
 
 ## Overview
 
-Aurelius v2 defines exactly three public models, sharing one output protocol, one control token set, and one execution specification. Hardware variation is handled through artifacts, profiles, backends, and quantization — not additional model names.
+Borealis defines exactly three public models, sharing one output protocol, one control token set, and one execution specification. Hardware variation is handled through artifacts, profiles, backends, and quantization — not additional model names.
 
 ## Model Hierarchy
 
 | Model | Parameters | Purpose | Target Hardware |
 |---|---|---|---|
-| **Aurelius Swift** | ~0.6B dense | Edge, router, verifier, fallback | Jetson Nano+, Mac 8GB+, any GPU 2GB+ |
-| **Aurelius Forge** | ~3B dense/hybrid | Default local agent, coding, CUA | Mac 16GB+, RTX 8-24GB+, Jetson Orin+ |
-| **Aurelius Atlas** | ~32B total / ~8B active MoE | Frontier reasoning, orchestration | RTX 6000+, Blackwell, Mac Ultra, remote |
+| **Borealis Spark** | ~0.6B dense | Edge, router, verifier, fallback | Jetson Nano+, Mac 8GB+, any GPU 2GB+ |
+| **Borealis Core** | ~3B dense/hybrid | Default local agent, coding, CUA | Mac 16GB+, RTX 8-24GB+, Jetson Orin+ |
+| **Borealis Apex** | ~32B total / ~8B active MoE | Frontier reasoning, orchestration | RTX 6000+, Blackwell, Mac Ultra, remote |
 
 ## Shared Architecture
 
@@ -79,7 +79,7 @@ All models share the same control vocabulary:
 - Optional middle-layer MoE-lite with shared expert
 - DecisionHead, ToolCallHead, CUAActionHead, MemoryOpHead, SkillHead, CriticHead, VerifierHead, EscalationHead
 - Compact OCR/VLM support for document/GUI perception
-- Full PRAXIS alignment
+- Full AURORA alignment
 
 ### Artifacts
 - safetensors (reference)
@@ -119,7 +119,7 @@ All models share the same control vocabulary:
 - Optional HOPE/CMS in deep layers
 - Full action head stack
 - Full SkillHead with composition/delegation
-- Full PRAXIS v2
+- Full AURORA v2
 - Model-spec midtraining
 - Agent RL
 - Full multimodal GUI/document/webpage perception
@@ -162,4 +162,4 @@ If the user requests Atlas and gets Swift, this must be stated explicitly. Silen
 Atlas trains Forge teaches Swift:
 - Atlas → Forge: reasoning, long-context, CUA imitation
 - Forge → Swift: routing, verification, decisive action
-- Shared: PRAXIS alignment, Safety gates, DAIES benchmarks
+- Shared: AURORA alignment, Safety gates, POLARIS benchmarks

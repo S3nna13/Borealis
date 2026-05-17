@@ -1,4 +1,4 @@
-"""Tests for Aurelius v2 Runtime foundation modules."""
+"""Tests for Borealis Runtime foundation modules."""
 import unittest
 
 from src.runtime.capability_report import CapabilityMode, CapabilityReport
@@ -45,7 +45,7 @@ class TestCapabilityReport(unittest.TestCase):
             requested_model="atlas",
             actual_model="swift",
             execution_mode=CapabilityMode.VERIFIER_ONLY,
-            backend="remote_aurelius",
+            backend="remote_borealis",
             artifact="swift-q3-gguf",
             quantization="q3",
             context_budget=4096,

@@ -1,10 +1,10 @@
 {
   "id": "ml.praxis_training_runner",
-  "name": "PRAXIS Training Runner",
+  "name": "AURORA Training Runner",
   "version": "1.0.0",
   "category": "ml",
-  "summary": "Run PRAXIS alignment training with all components.",
-  "description": "Run PRAXIS alignment training with all components.",
+  "summary": "Run AURORA alignment training with all components.",
+  "description": "Run AURORA alignment training with all components.",
   "permissions": [
     {
       "name": "file_read",
@@ -29,7 +29,7 @@
   "entrypoint": "skills.builtin.ml.praxis_training_runner:run",
   "inputs_schema": "",
   "outputs_schema": "",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run"

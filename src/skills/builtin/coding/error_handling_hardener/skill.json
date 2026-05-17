@@ -25,7 +25,7 @@
   "entrypoint": "skills.builtin.coding.error_handling_hardener:run",
   "inputs_schema": "schemas/error_handling_hardener.input.json",
   "outputs_schema": "schemas/error_handling_hardener.output.json",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run"

@@ -1,8 +1,8 @@
-# DAIES v2 Validation Gates
+# POLARIS v2 Validation Gates
 
 ## Overview
 
-DAIES (Decide, Adapt, Integrate, Evaluate, Scale) is the governing process for every Aurelius feature. No feature ships to production or scales to Atlas without passing DAIES gates.
+POLARIS (Decide, Adapt, Integrate, Evaluate, Scale) is the governing process for every Borealis feature. No feature ships to production or scales to Atlas without passing POLARIS gates.
 
 ## Gate Categories
 
@@ -10,12 +10,12 @@ DAIES (Decide, Adapt, Integrate, Evaluate, Scale) is the governing process for e
 
 | Gate | Validates |
 |---|---|
-| `CLIHelpGate` | `aurelius --help` shows accurate commands |
+| `CLIHelpGate` | `borealis --help` shows accurate commands |
 | `CLIHardwareDetectGate` | Hardware detection produces valid profile |
 | `CLIModelLoadGate` | Requested model loads or reports fallback truthfully |
 | `CLIBackendSelectGate` | Backend selection produces valid capability report |
 | `CLICapabilityReportGate` | Capability report shows all metadata fields |
-| `CLIDAIESQuickGate` | Quick gate check runs successfully |
+| `CLIPOLARISQuickGate` | Quick gate check runs successfully |
 | `CLICUACaptureGate` | CUA capture works in available mode |
 | `CLINativeSkillListGate` | Native skills list returns >0 skills |
 | `CLINativeSkillRunGate` | Native skill dry-run produces valid output |
@@ -27,7 +27,7 @@ DAIES (Decide, Adapt, Integrate, Evaluate, Scale) is the governing process for e
 |---|---|
 | `UIModelHubTruthGate` | Model hub shows requested vs actual, backend, quantization |
 | `UIHealthMemoryGate` | Health page shows RAM/VRAM/unified memory usage |
-| `UIDAIESSummaryGate` | DAIES dashboard shows gate results |
+| `UIPOLARISSummaryGate` | POLARIS dashboard shows gate results |
 | `UICUATraceGate` | CUA trace replay shows actions + screenshots |
 | `UISkillCatalogGate` | Native skill catalog shows permissions, tests, telemetry |
 | `UIAccessibilityGate` | Screen reader keyboard navigation works |

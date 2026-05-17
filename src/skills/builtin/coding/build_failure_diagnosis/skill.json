@@ -29,7 +29,7 @@
   "entrypoint": "skills.builtin.coding.build_failure_diagnosis:run",
   "inputs_schema": "schemas/build_failure_diagnosis.input.json",
   "outputs_schema": "schemas/build_failure_diagnosis.output.json",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run"

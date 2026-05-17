@@ -1,10 +1,10 @@
 {
-  "id": "operator.daies_full_gate_runner",
-  "name": "DAIES Full Gate Runner",
+  "id": "operator.polaris_full_gate_runner",
+  "name": "POLARIS Full Gate Runner",
   "version": "1.0.0",
   "category": "operator",
-  "summary": "Run the complete DAIES validation gate suite.",
-  "description": "Run the complete DAIES validation gate suite.",
+  "summary": "Run the complete POLARIS validation gate suite.",
+  "description": "Run the complete POLARIS validation gate suite.",
   "permissions": [
     {
       "name": "file_read",
@@ -22,17 +22,17 @@
     "file.patch",
     "terminal.run"
   ],
-  "entrypoint": "skills.builtin.operator.daies_full_gate_runner:run",
+  "entrypoint": "skills.builtin.operator.polaris_full_gate_runner:run",
   "inputs_schema": "",
   "outputs_schema": "",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run"
   ],
   "tags": [
     "operator",
-    "daies"
+    "polaris"
   ],
   "status": "stable",
   "supported_modes": [

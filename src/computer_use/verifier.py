@@ -1,4 +1,4 @@
-"""Aurelius v2 CUA Action Verifier — safety gate for every CUA action.
+"""Borealis CUA Action Verifier — safety gate for every CUA action.
 
 Blocks:
 - Password/secret entry fields

@@ -1,4 +1,4 @@
-"""Aurelius v2 CUA Audit Log — immutable audit trail of all CUA actions."""
+"""Borealis CUA Audit Log — immutable audit trail of all CUA actions."""
 
 from __future__ import annotations
 

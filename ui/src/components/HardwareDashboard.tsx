@@ -12,7 +12,7 @@ interface HardwareInfo {
 
 interface MemoryBudget {
   total_memory_gb: number;
-  available_for_aurelius_gb: number;
+  available_for_borealis_gb: number;
   used_gb: number;
   free_gb: number;
   pressure_level: string;
@@ -94,12 +94,12 @@ const HardwareDashboard: React.FC = () => {
             <div
               className="h-8 rounded-full transition-all duration-500"
               style={{
-                width: `${(memory.used_gb / memory.available_for_aurelius_gb) * 100}%`,
+                width: `${(memory.used_gb / memory.available_for_borealis_gb) * 100}%`,
                 backgroundColor: pressureColor(memory.pressure_level),
               }}
             />
             <span className="absolute inset-0 flex items-center justify-center text-sm font-medium text-gray-100">
-              {memory.used_gb.toFixed(1)} / {memory.available_for_aurelius_gb.toFixed(1)} GB ({((memory.used_gb / memory.available_for_aurelius_gb) * 100).toFixed(0)}%)
+              {memory.used_gb.toFixed(1)} / {memory.available_for_borealis_gb.toFixed(1)} GB ({((memory.used_gb / memory.available_for_borealis_gb) * 100).toFixed(0)}%)
             </span>
           </div>
           <p className="mt-2 text-gray-400">

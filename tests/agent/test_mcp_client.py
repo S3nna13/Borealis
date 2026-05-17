@@ -66,11 +66,11 @@ def test_initialize_returns_handshake_dict():
 
 def test_initialize_sent_with_client_metadata():
     server = FakeServer({"initialize": _ok({"protocolVersion": MCP_PROTOCOL_VERSION})})
-    client = MCPClient(server, client_name="aurelius", client_version="9.9.9")
+    client = MCPClient(server, client_name="borealis", client_version="9.9.9")
     client.initialize()
     method, params = server.calls[0]
     assert method == "initialize"
-    assert params["clientInfo"] == {"name": "aurelius", "version": "9.9.9"}
+    assert params["clientInfo"] == {"name": "borealis", "version": "9.9.9"}
     assert params["protocolVersion"] == MCP_PROTOCOL_VERSION
     assert "capabilities" in params
 

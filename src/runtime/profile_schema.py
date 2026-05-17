@@ -1,4 +1,4 @@
-"""Aurelius v2 Profile Schema — Hardware, runtime, and user profile definitions."""
+"""Borealis Profile Schema — Hardware, runtime, and user profile definitions."""
 
 from __future__ import annotations
 

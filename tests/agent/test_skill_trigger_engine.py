@@ -1,11 +1,11 @@
-"""Tests for the Aurelius v2 skill trigger engine."""
+"""Tests for the Borealis skill trigger engine."""
 
 from __future__ import annotations
 
 import json
 
 import pytest
-from aurelius_cli.v2_cli import cmd_skills_suggest
+from borealis_cli.v2_cli import cmd_skills_suggest
 from src.agent.skill_trigger_engine import SkillTriggerEngine, TriggerEngineError
 from src.skills.manifest import SkillManifest, SkillStatus
 from src.skills.registry import SkillEntry, SkillRegistry

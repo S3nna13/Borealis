@@ -193,7 +193,7 @@ class TaskScheduler:
         self._jobs_lock = threading.Lock()
         self._started = False
         self._store_path = (
-            Path(store_path) if store_path else Path.home() / ".cache" / "aurelius" / "jobs.json"
+            Path(store_path) if store_path else Path.home() / ".cache" / "borealis" / "jobs.json"
         )
         self._store_path.parent.mkdir(parents=True, exist_ok=True)
         self._load_store()

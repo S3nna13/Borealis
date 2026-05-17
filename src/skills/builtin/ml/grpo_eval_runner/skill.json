@@ -29,7 +29,7 @@
   "entrypoint": "skills.builtin.ml.grpo_eval_runner:run",
   "inputs_schema": "",
   "outputs_schema": "",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run"

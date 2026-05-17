@@ -1,4 +1,4 @@
-"""Aurelius v2 Chunked Prefill Scheduler — efficient prefill for long contexts."""
+"""Borealis Chunked Prefill Scheduler — efficient prefill for long contexts."""
 
 from __future__ import annotations
 

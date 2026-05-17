@@ -1,4 +1,4 @@
-"""Aurelius v2 Runtime — Hardware detection, memory budgets, backend selection, profiling."""
+"""Borealis Runtime — Hardware detection, memory budgets, backend selection, profiling."""
 
 from src.runtime.backend_selector import (
     BackendSelection,

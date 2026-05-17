@@ -1,4 +1,4 @@
-"""Aurelius v2 KV Cache — paged allocation, quantization, prefix caching.
+"""Borealis KV Cache — paged allocation, quantization, prefix caching.
 
 Implements:
 - PagedKVCache: Non-contiguous KV cache blocks (like vLLM paged attention)

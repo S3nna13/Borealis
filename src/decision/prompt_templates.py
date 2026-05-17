@@ -1,4 +1,4 @@
-"""Aurelius v2 Decision Prompt Templates — structured prompt construction for decision heads.
+"""Borealis Decision Prompt Templates — structured prompt construction for decision heads.
 
 Implements the shared protocol from Section 9 of the master plan:
 - Control tokens for all output families

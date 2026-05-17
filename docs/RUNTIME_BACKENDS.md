@@ -12,7 +12,7 @@
 | tensorrt_edge_llm | Local GPU | Jetson/Orin | Jetson edge inference |
 | tensorrt_llm | Local GPU | NVIDIA GPUs | Production RTX/Blackwell serving |
 | vllm | Local GPU | NVIDIA GPUs | High-throughput batch serving |
-| remote_aurelius | Remote | Any | Thin clients, split execution |
+| remote_borealis | Remote | Any | Thin clients, split execution |
 
 ## Selection Flow
 
@@ -30,4 +30,4 @@
 | tensorrt_edge_llm | int8/fp16/q4 | Full | No | Medium | Medium |
 | tensorrt_llm | fp4/fp8/fp16/bf16 | Full | No | Large | High |
 | vllm | fp8/fp16/bf16 | Full | No | Large | High |
-| remote_aurelius | Server-defined | N/A | N/A | Unlimited | Server-side |
+| remote_borealis | Server-defined | N/A | N/A | Unlimited | Server-side |

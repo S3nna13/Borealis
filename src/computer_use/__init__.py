@@ -1,4 +1,4 @@
-"""Aurelius v2 CUA — Computer Use / Desktop Automation with verifier-based safety."""
+"""Borealis CUA — Computer Use / Desktop Automation with verifier-based safety."""
 
 from src.computer_use.audit_log import CUAEntry, CUAuditLog
 from src.computer_use.driver_base import ComputerUseDriver, CUAAction, CUAMode, CUAObservation

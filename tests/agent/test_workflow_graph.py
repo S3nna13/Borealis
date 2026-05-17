@@ -1,4 +1,4 @@
-"""Tests for the Aurelius v2 workflow graph."""
+"""Tests for the Borealis workflow graph."""
 
 from __future__ import annotations
 

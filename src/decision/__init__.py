@@ -1,4 +1,4 @@
-"""Aurelius v2 Decision System — action heads, routing, and decisive agent behavior."""
+"""Borealis Decision System — action heads, routing, and decisive agent behavior."""
 
 from src.decision.action_heads import (
     CriticHead,

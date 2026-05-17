@@ -1,1 +1,1 @@
-"""Aurelius v2 Built-in Skills - ml"""
+"""Borealis Built-in Skills - ml"""

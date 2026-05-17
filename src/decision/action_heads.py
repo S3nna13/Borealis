@@ -1,4 +1,4 @@
-"""Aurelius v2 Action Heads — ToolCall, MemoryOp, Skill, Critic, Verifier, Escalation, CUA."""
+"""Borealis Action Heads — ToolCall, MemoryOp, Skill, Critic, Verifier, Escalation, CUA."""
 
 from __future__ import annotations
 

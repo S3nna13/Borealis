@@ -29,7 +29,7 @@
   "entrypoint": "skills.builtin.coding.node_api_repair:run",
   "inputs_schema": "schemas/node_api_repair.input.json",
   "outputs_schema": "schemas/node_api_repair.output.json",
-  "daies_tests": [
+  "polaris_tests": [
     "skill_manifest_valid",
     "permission_boundary",
     "dry_run"

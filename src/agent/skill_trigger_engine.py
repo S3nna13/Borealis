@@ -1,6 +1,6 @@
-"""Aurelius v2 skill trigger engine.
+"""Borealis skill trigger engine.
 
-This is a compact port of the original Aurelius trigger engine idea: match
+This is a compact port of the original Borealis trigger engine idea: match
 incoming text against registered skills, then optionally dry-run or execute
 matched skills via the v2 skill executor.
 """

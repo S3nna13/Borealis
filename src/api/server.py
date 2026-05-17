@@ -1,4 +1,4 @@
-"""Aurelius v2 API Server — FastAPI runtime truth layer.
+"""Borealis API Server — FastAPI runtime truth layer.
 
 Serves:
 - /api/hardware/detect
@@ -6,8 +6,8 @@ Serves:
 - /api/backends
 - /api/backends/select
 - /api/capabilities
-- /api/daies/runs
-- /api/daies/run
+- /api/polaris/runs
+- /api/polaris/run
 - /api/exports
 - /api/cua/*
 - /api/checkpoints
@@ -28,7 +28,7 @@ from typing import Any
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
-app = FastAPI(title="Aurelius v2 API", version="2.0.0")
+app = FastAPI(title="Borealis API", version="2.0.0")
 
 
 # ── Request/Response Models ───────────────────────────────────────────────────
@@ -93,7 +93,7 @@ async def api_health() -> dict[str, Any]:
             },
             "memory": report.to_dict() if hasattr(report, "to_dict") else {
                 "total_memory_gb": report.total_memory_gb,
-                "available_for_aurelius_gb": report.available_for_aurelius_gb,
+                "available_for_borealis_gb": report.available_for_borealis_gb,
                 "used_gb": report.used_gb,
                 "free_gb": report.free_gb,
                 "pressure_level": report.pressure_level.value,
@@ -167,7 +167,7 @@ async def api_backends() -> dict[str, Any]:
             {"name": "tensorrt_edge_llm", "status": "conditional", "platforms": ["linux"], "requires": "jetson"},
             {"name": "tensorrt_llm", "status": "conditional", "platforms": ["linux"], "requires": "nvidia_gpu"},
             {"name": "vllm", "status": "conditional", "platforms": ["linux"], "requires": "nvidia_gpu"},
-            {"name": "remote_aurelius", "status": "available", "platforms": ["all"]},
+            {"name": "remote_borealis", "status": "available", "platforms": ["all"]},
         ]
     }
 
@@ -217,17 +217,17 @@ async def api_capabilities(model: str = "forge") -> CapabilityResponse:
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# ── DAIES ─────────────────────────────────────────────────────────────────────
+# ── POLARIS ─────────────────────────────────────────────────────────────────────
 
-@app.get("/api/daies/runs")
-async def api_daies_runs() -> dict[str, Any]:
-    """List DAIES gate run history."""
+@app.get("/api/polaris/runs")
+async def api_polaris_runs() -> dict[str, Any]:
+    """List POLARIS gate run history."""
     return {"runs": [], "total": 0}
 
 
-@app.post("/api/daies/run")
-async def api_daies_run(gate: str = "quick") -> dict[str, Any]:
-    """Run DAIES validation gates."""
+@app.post("/api/polaris/run")
+async def api_polaris_run(gate: str = "quick") -> dict[str, Any]:
+    """Run POLARIS validation gates."""
     try:
         from src.skills.registry import SkillRegistry
         from src.skills.validator import SkillValidator
@@ -244,7 +244,7 @@ async def api_daies_run(gate: str = "quick") -> dict[str, Any]:
                 results["passed"] += 1
             else:
                 results["failed"] += 1
-            for g, passed in report.daies_gate_results.items():
+            for g, passed in report.polaris_gate_results.items():
                 results["gates"].setdefault(g, {"passed": 0, "failed": 0})
                 if passed:
                     results["gates"][g]["passed"] += 1
@@ -367,7 +367,7 @@ async def api_chat(request: ChatRequest) -> ChatResponse:
         selection = selector.select(request.requested_model, profile)
 
         return ChatResponse(
-            text="Aurelius v2 chat endpoint active. Model inference requires model weights.",
+            text="Borealis chat endpoint active. Model inference requires model weights.",
             requested_model=request.requested_model,
             actual_model=request.requested_model,
             execution_mode=selection.capability_mode.value,

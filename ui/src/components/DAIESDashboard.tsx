@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-const DAIESDashboard: React.FC = () => {
+const POLARISDashboard: React.FC = () => {
   const [results, setResults] = useState<any>(null);
   const [loading, setLoading] = useState(false);
 
   const runGates = () => {
     setLoading(true);
-    fetch("/api/daies/run", { method: "POST" })
+    fetch("/api/polaris/run", { method: "POST" })
       .then(r => r.json())
       .then(data => { setResults(data); setLoading(false); })
       .catch(() => setLoading(false));
@@ -15,7 +15,7 @@ const DAIESDashboard: React.FC = () => {
   return (
     <div className="p-6 space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-100">DAIES Validation Gates</h1>
+        <h1 className="text-2xl font-bold text-gray-100">POLARIS Validation Gates</h1>
         <button onClick={runGates} disabled={loading} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white disabled:opacity-50">
           {loading ? "Running..." : "Run All Gates"}
         </button>
@@ -71,4 +71,4 @@ const DAIESDashboard: React.FC = () => {
   );
 };
 
-export default DAIESDashboard;
+export default POLARISDashboard;

@@ -1,1 +1,1 @@
-"""Aurelius v2 Built-in Skills - devops"""
+"""Borealis Built-in Skills - devops"""
