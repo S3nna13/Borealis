@@ -347,6 +347,80 @@ def cmd_mcp_list() -> int:
         return 1
 
 
+def cmd_config_show(key: str = "") -> int:
+    """Show current configuration."""
+    try:
+        from src.config.manager import ConfigManager
+        mgr = ConfigManager()
+        mgr.load()
+        if key:
+            value = mgr.get(key)
+            print(f"{key}: {value}")
+        else:
+            print(mgr.config.to_yaml())
+        return 0
+    except KeyError as e:
+        print(f"ERROR: {e}")
+        return 1
+    except ImportError as e:
+        print(f"ERROR: {e}")
+        return 1
+
+
+def cmd_config_set(key: str, value: str) -> int:
+    """Set a configuration value."""
+    try:
+        from src.config.manager import ConfigManager
+        mgr = ConfigManager()
+        mgr.load()
+        # Try to parse value as appropriate type
+        parsed: Any = value
+        if value.lower() in ("true", "false"):
+            parsed = value.lower() == "true"
+        elif value.isdigit():
+            parsed = int(value)
+        else:
+            try:
+                parsed = float(value)
+            except ValueError:
+                pass
+        mgr.set(key, parsed)
+        mgr.save()
+        print(f"Set {key} = {parsed}")
+        print(f"Config saved to {mgr.config_path}")
+        return 0
+    except KeyError as e:
+        print(f"ERROR: {e}")
+        return 1
+    except ImportError as e:
+        print(f"ERROR: {e}")
+        return 1
+
+
+def cmd_config_reset() -> int:
+    """Reset configuration to defaults."""
+    try:
+        from src.config.manager import ConfigManager
+        mgr = ConfigManager()
+        mgr.reset()
+        mgr.save()
+        print(f"Configuration reset to defaults")
+        print(f"Config saved to {mgr.config_path}")
+        return 0
+    except ImportError as e:
+        print(f"ERROR: {e}")
+        return 1
+
+
+def cmd_config_path() -> int:
+    """Show configuration file path."""
+    from src.config.manager import ConfigManager
+    mgr = ConfigManager()
+    print(f"Config path: {mgr.config_path}")
+    print(f"Exists: {os.path.exists(mgr.config_path)}")
+    return 0
+
+
 def cmd_ui() -> int:
     """Open Aurora Dashboard UI."""
     print("Opening Aurora Dashboard UI...")
@@ -359,7 +433,7 @@ def main_v2() -> int:
     """Entry point for v2 commands when invoked directly."""
     if len(sys.argv) < 2:
         print("Usage: python -m borealis_cli.v2_cli <command> [args]")
-        print("Commands: doctor, hardware, skills, polaris, schedule, status, serve, mcp, ui, skills suggest")
+        print("Commands: doctor, hardware, skills, polaris, schedule, status, serve, mcp, config, ui, skills suggest")
         return 1
 
     command = sys.argv[1]
@@ -416,6 +490,26 @@ def main_v2() -> int:
         else:
             print("Usage: borealis mcp serve [--port N] [--transport stdio|streamable-http]")
             print("       borealis mcp list")
+            return 1
+    elif command == "config":
+        if len(sys.argv) > 2 and sys.argv[2] == "show":
+            key = sys.argv[3] if len(sys.argv) > 3 else ""
+            return cmd_config_show(key)
+        elif len(sys.argv) > 2 and sys.argv[2] == "set":
+            if len(sys.argv) < 5:
+                print("Usage: borealis config set <key> <value>")
+                print("Example: borealis config set model.preferred_model apex")
+                return 1
+            return cmd_config_set(sys.argv[3], sys.argv[4])
+        elif len(sys.argv) > 2 and sys.argv[2] == "reset":
+            return cmd_config_reset()
+        elif len(sys.argv) > 2 and sys.argv[2] == "path":
+            return cmd_config_path()
+        else:
+            print("Usage: borealis config show [key]")
+            print("       borealis config set <key> <value>")
+            print("       borealis config reset")
+            print("       borealis config path")
             return 1
     elif command == "ui":
         return cmd_ui()
