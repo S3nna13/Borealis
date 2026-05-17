@@ -276,6 +276,77 @@ def cmd_serve(port: int = 8000) -> int:
     return 0
 
 
+def cmd_mcp_serve(transport: str = "streamable-http", port: int = 8000) -> int:
+    """Start Borealis MCP server."""
+    try:
+        from src.mcp.server import create_mcp_server
+        mcp = create_mcp_server()
+        registry = _get_mcp_registry_for_display()
+        print(f"Starting Borealis MCP Server ({transport} on port {port})...")
+        print(f"Exposing {registry['total_skills']} skills as MCP tools")
+        print(f"Categories: {', '.join(registry['categories'])}")
+        print(f"\nConnect with: borealis mcp connect http://localhost:{port}/mcp")
+        print("Or add to your MCP client configuration.")
+        mcp.run(transport=transport, port=port)
+        return 0
+    except ImportError as e:
+        print(f"ERROR: MCP module not available: {e}")
+        print("Install MCP dependency: pip install mcp")
+        return 1
+    except Exception as e:
+        print(f"ERROR: Failed to start MCP server: {e}")
+        return 1
+
+
+def _get_mcp_registry_for_display() -> dict:
+    """Get registry stats for MCP server display."""
+    try:
+        from src.skills.registry import SkillRegistry
+        registry = SkillRegistry()
+        registry.discover_from_path()
+        stats = registry.stats()
+        return {
+            "total_skills": stats["total_skills"],
+            "categories": stats["categories"],
+        }
+    except Exception:
+        return {"total_skills": 0, "categories": []}
+
+
+def cmd_mcp_list() -> int:
+    """List skills exposed via MCP."""
+    try:
+        from src.mcp.server import create_mcp_server
+        from src.skills.registry import SkillRegistry
+
+        registry = SkillRegistry()
+        count = registry.discover_from_path()
+        skills = registry.list_skills()
+
+        con = _console()
+        if con:
+            table = Table(title=f"Borealis MCP Tools ({len(skills)} exposed)")
+            table.add_column("Tool Name", style="cyan")
+            table.add_column("Skill ID")
+            table.add_column("Category")
+            table.add_column("Risk")
+            for s in skills:
+                if s.manifest.status.value not in ("deprecated", "unsafe"):
+                    tool_name = s.manifest.id.replace(".", "_")
+                    table.add_row(tool_name, s.manifest.id, s.manifest.category, s.manifest.risk_level.value)
+            con.print(table)
+        else:
+            print(f"MCP Tools ({len(skills)} skills)")
+            print("=" * 60)
+            for s in skills:
+                if s.manifest.status.value not in ("deprecated", "unsafe"):
+                    print(f"  {s.manifest.id.replace('.', '_'):40s} [{s.manifest.risk_level.value:8s}] {s.manifest.name}")
+        return 0
+    except ImportError as e:
+        print(f"ERROR: {e}")
+        return 1
+
+
 def cmd_ui() -> int:
     """Open Aurora Dashboard UI."""
     print("Opening Aurora Dashboard UI...")
@@ -288,7 +359,7 @@ def main_v2() -> int:
     """Entry point for v2 commands when invoked directly."""
     if len(sys.argv) < 2:
         print("Usage: python -m borealis_cli.v2_cli <command> [args]")
-        print("Commands: doctor, hardware, skills, polaris, schedule, status, serve, ui, skills suggest")
+        print("Commands: doctor, hardware, skills, polaris, schedule, status, serve, mcp, ui, skills suggest")
         return 1
 
     command = sys.argv[1]
@@ -325,6 +396,27 @@ def main_v2() -> int:
         if len(sys.argv) > 3 and sys.argv[2] == "--port":
             port = int(sys.argv[3])
         return cmd_serve(port)
+    elif command == "mcp":
+        if len(sys.argv) > 2 and sys.argv[2] == "serve":
+            port = 8000
+            transport = "streamable-http"
+            i = 3
+            while i < len(sys.argv):
+                if sys.argv[i] == "--port" and i + 1 < len(sys.argv):
+                    port = int(sys.argv[i + 1])
+                    i += 2
+                elif sys.argv[i] == "--transport" and i + 1 < len(sys.argv):
+                    transport = sys.argv[i + 1]
+                    i += 2
+                else:
+                    i += 1
+            return cmd_mcp_serve(transport=transport, port=port)
+        elif len(sys.argv) > 2 and sys.argv[2] == "list":
+            return cmd_mcp_list()
+        else:
+            print("Usage: borealis mcp serve [--port N] [--transport stdio|streamable-http]")
+            print("       borealis mcp list")
+            return 1
     elif command == "ui":
         return cmd_ui()
     else:

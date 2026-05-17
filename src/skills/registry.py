@@ -67,7 +67,8 @@ class SkillRegistry:
         for category_dir in sorted(builtin_path.iterdir()):
             if not category_dir.is_dir():
                 continue
-            for skill_file in category_dir.glob("skill.json"):
+            # Search recursively for skill.json files in subdirectories
+            for skill_file in category_dir.rglob("skill.json"):
                 try:
                     data = json.loads(skill_file.read_text())
                     perm_list = data.get("permissions", [])
