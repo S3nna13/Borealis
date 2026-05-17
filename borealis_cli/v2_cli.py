@@ -414,11 +414,163 @@ def cmd_config_reset() -> int:
 
 def cmd_config_path() -> int:
     """Show configuration file path."""
+    import os
     from src.config.manager import ConfigManager
     mgr = ConfigManager()
     print(f"Config path: {mgr.config_path}")
     print(f"Exists: {os.path.exists(mgr.config_path)}")
     return 0
+
+
+def cmd_models_list() -> int:
+    """List available model artifacts."""
+    try:
+        from src.runtime.hardware_detector import HardwareDetector
+        from src.config.manager import ConfigManager
+
+        hw = HardwareDetector()
+        info = hw.detect()
+        config = ConfigManager()
+
+        models = [
+            {
+                "name": "spark",
+                "size": "~0.6B",
+                "role": "Edge, router, verifier, fallback",
+                "min_ram": "8GB",
+                "preferred": config.get("model.preferred_model") == "spark",
+            },
+            {
+                "name": "core",
+                "size": "~3B",
+                "role": "Default local agent, coding, CUA",
+                "min_ram": "16GB",
+                "preferred": config.get("model.preferred_model") == "core",
+            },
+            {
+                "name": "apex",
+                "size": "~32B MoE",
+                "role": "Frontier reasoning, orchestration",
+                "min_ram": "48GB",
+                "preferred": config.get("model.preferred_model") == "apex",
+            },
+        ]
+
+        con = _console()
+        if con:
+            table = Table(title="Borealis Models")
+            table.add_column("Model", style="cyan")
+            table.add_column("Size")
+            table.add_column("Role")
+            table.add_column("Min RAM")
+            table.add_column("Preferred")
+            for m in models:
+                pref = "[green]yes[/]" if m["preferred"] else "[dim]no[/]"
+                table.add_row(m["name"], m["size"], m["role"], m["min_ram"], pref)
+            con.print(table)
+        else:
+            print(f"Borealis Models (hardware: {info.cpu_arch})")
+            print("=" * 60)
+            for m in models:
+                pref = " *" if m["preferred"] else ""
+                print(f"  {m['name']:8s} {m['size']:12s} {m['role']}{pref}")
+
+        print(f"\nActive backend: {config.get('backend.preferred_backend')}")
+        print(f"Set preferred model: borealis config set model.preferred_model <name>")
+        return 0
+    except ImportError as e:
+        print(f"ERROR: {e}")
+        return 1
+
+
+def cmd_models_info(model: str = "core") -> int:
+    """Show detailed info about a specific model."""
+    models = {
+        "spark": {
+            "name": "Borealis Spark",
+            "size": "~0.6B dense",
+            "role": "Edge, router, verifier, fallback",
+            "hardware": "Jetson Nano+, Mac 8GB+, any GPU",
+            "execution": "Native Q3/Q4 on edge devices",
+            "backends": "mlx, llama_cpp_gguf, onnx_runtime",
+        },
+        "core": {
+            "name": "Borealis Core",
+            "size": "~3B dense/hybrid",
+            "role": "Default local agent, coding, CUA",
+            "hardware": "Mac 16GB+, RTX 8-24GB+, Jetson Orin+",
+            "execution": "Native or Q4 on most hardware",
+            "backends": "mlx, pytorch_eager, torch_compile, vllm, tensorrt_llm",
+        },
+        "apex": {
+            "name": "Borealis Apex",
+            "size": "~32B total / ~8B active MoE",
+            "role": "Frontier reasoning, orchestration",
+            "hardware": "RTX 6000+, Blackwell, Mac Ultra, remote",
+            "execution": "Q4 offload or split/remote on smaller hardware",
+            "backends": "vllm, tensorrt_llm, remote_borealis",
+        },
+    }
+
+    model = model.lower()
+    if model not in models:
+        print(f"Unknown model: {model}. Available: spark, core, apex")
+        return 1
+
+    m = models[model]
+    con = _console()
+    if con:
+        from rich.panel import Panel
+        panel = Panel(
+            f"Size: {m['size']}\n"
+            f"Role: {m['role']}\n"
+            f"Hardware: {m['hardware']}\n"
+            f"Execution: {m['execution']}\n"
+            f"Backends: {m['backends']}",
+            title=m["name"],
+            border_style="cyan",
+        )
+        con.print(panel)
+    else:
+        print(f"{m['name']}")
+        print("=" * 40)
+        print(f"  Size: {m['size']}")
+        print(f"  Role: {m['role']}")
+        print(f"  Hardware: {m['hardware']}")
+        print(f"  Execution: {m['execution']}")
+        print(f"  Backends: {m['backends']}")
+    return 0
+
+
+def cmd_run(prompt: str) -> int:
+    """One-shot task execution."""
+    if not prompt:
+        print("Usage: borealis run <prompt>")
+        print("Example: borealis run 'List all Python files in this project'")
+        return 1
+
+    try:
+        from src.config.manager import ConfigManager
+        config = ConfigManager()
+        config.load()
+
+        model = config.get("model.preferred_model")
+        max_tokens = config.get("model.max_tokens")
+        context_size = config.get("model.default_context_size")
+
+        print(f"Running on {model} (ctx: {context_size}, max_tokens: {max_tokens})")
+        print(f"Prompt: {prompt[:200]}{'...' if len(prompt) > 200 else ''}")
+        print()
+        print("This requires a running Borealis API server.")
+        print("Start one with: borealis serve --port 8000")
+        print("Then POST to /api/chat with the prompt.")
+        print()
+        print("Direct local execution coming in a future release.")
+        print("For now, use the API server or connect via MCP.")
+        return 0
+    except ImportError as e:
+        print(f"ERROR: {e}")
+        return 1
 
 
 def cmd_ui() -> int:
@@ -433,7 +585,7 @@ def main_v2() -> int:
     """Entry point for v2 commands when invoked directly."""
     if len(sys.argv) < 2:
         print("Usage: python -m borealis_cli.v2_cli <command> [args]")
-        print("Commands: doctor, hardware, skills, polaris, schedule, status, serve, mcp, config, ui, skills suggest")
+        print("Commands: doctor, hardware, skills, polaris, schedule, status, serve, models, run, mcp, config, ui, skills suggest")
         return 1
 
     command = sys.argv[1]
@@ -470,6 +622,19 @@ def main_v2() -> int:
         if len(sys.argv) > 3 and sys.argv[2] == "--port":
             port = int(sys.argv[3])
         return cmd_serve(port)
+    elif command == "models":
+        if len(sys.argv) > 2 and sys.argv[2] == "list":
+            return cmd_models_list()
+        elif len(sys.argv) > 2 and sys.argv[2] == "info":
+            model = sys.argv[3] if len(sys.argv) > 3 else "core"
+            return cmd_models_info(model)
+        else:
+            print("Usage: borealis models list")
+            print("       borealis models info [spark|core|apex]")
+            return 1
+    elif command == "run":
+        prompt = " ".join(sys.argv[2:]).strip()
+        return cmd_run(prompt)
     elif command == "mcp":
         if len(sys.argv) > 2 and sys.argv[2] == "serve":
             port = 8000
